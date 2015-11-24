@@ -94,8 +94,114 @@ public class Person
 		case class Person(firstName:String, lastName:String)
 	</code>
 </pre>
-					</section>
 
+					</section>
+					<section>
+						<h2>Myter om scala</h2>
+						<ul>
+							<li class="fragment">Scala blir overflødig med Java 8</li>
+							<ul>
+								<li class="fragment">Fakta: Den Verste boilerplate forsvinner, men det er mye mer:</li>
+								<li class="fragment">typeinterferens, makroer, pattern matching, Option i API, immutabilitet, case classes, overlasting av operatorer, navngitte parametre, defaultverdier, implicits etc.</li>
+							</ul>
+							<li class="fragment">Scala er vanskelig å lære</li>
+								<ul>
+									<li class="fragment">Fakta: Det er et stort språk med mye syntax, men man kan ta i bruk så mye man ønsker.</li>
+									<li class="fragment">Største forskjellen er funksjonell programmering og oppfordring til immutabilitet, som kommer i alle språk nå (Java 8 lambdas, Immutable.js)</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<h2>Scala.Js</h2>
+					<ul>
+						<li class="fragment">Kompilering av Scala-kildekode for å kjøre som Javascript ("webbens assemblykode"), som Typescript, Coffescript etc.</li>
+						<li class="fragment">Startet som et forskningsprosjekt på EPFL. Nå et stort miljø rundt både kompilator og tilhørende bibiliotek</li>
+						<li class="fragment">Ble erklært stabilt for bruk (og stabile API-er) våren 2015</li>
+						<li class="fragment">Det meste av Scalas funksjoner er støttet (inkl. makroer, Futures, typeklasser). Mangler reflection og tråder/sleep (som i JS).</li>
+						<li class="fragment">Bibliotek kan krysskompileres til både Scala.Js og JVM og publisere begge til Maven-repositories.</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Pipeline</h2>
+					<img src="sjs-pipeline.jpg">
+					<p>Java-bibliotek støttes ikke. Inkompatibilitet med lisenser gjør at man ikke kan konvertere Java-kode til Scala og krysskompilere</p>
+					<p>Kan løses med clean room-kloner, e.g. JodaTime -> SodaTime</p>
+				</section>
+
+				<section>
+					<h2>Interop med Javascript</h2>
+					<pre>
+						<code class="scala">
+import scala.scalajs.js.Dynamic.{global => g}
+
+@JSExport
+object HelloWorld {
+    @JSExport
+    def main(): Unit = {
+        println("Hello world!")
+
+        val seekBarAndroid: Dynamic =
+           g.require("react-native-seekbar-android")
+    }
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Datatyper</h2>
+					<ul>
+						<li>Vanlige som Boolean, Int, Float er støttet</li>
+						<li>var x = 5; val y = "Constant"</li>
+						<li>js.Object</li>
+						<li>js.Function (konverteres automatisk til/fra Scala-funksjoner)</li>
+						<li>Javascript-objekter: js.Dynamic.literal(foo = 42, bar = "foobar") eller js.Dynamic.literal("foo" -> 42, "bar" -> "foobar")</li>
+						<li>js.UndefOr[T] og pseudo-union: Int | Boolean</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Definere ES6-klasser</h2>
+					<pre>
+<code class="scala">
+import scala.scalajs.js
+import js.annotation._
+
+@ScalaJSDefined
+class Foo extends js.Object {
+  val x: Int = 4
+  def bar(x: Int): Int = x + 1
+}
+</code>
+					</pre>
+					<p>Kan brukes mot API-er som krever JS-klasser, f.eks. React</p>
+				</section>
+				<section>
+					<h2>JS-wrappere</h2>
+					<pre>
+						<code class="scala">
+@js.native
+trait Window extends js.Object {
+	val document: HTMLDocument = js.native
+	var location: String = js.native
+
+	def innerWidth: Int = js.native
+	def innerHeight: Int = js.native
+
+	def alert(message: String): Unit = js.native
+
+	def open(url: String, target: String,
+		features: String = ""): Window = js.native
+	def close(): Unit = js.native
+}
+
+@JSName("THREE.Scene")
+@js.native
+class Scene extends js.Object
+					</code>
+					</pre>
 				</section>
 
 				<!-- Example of nested vertical slides -->
