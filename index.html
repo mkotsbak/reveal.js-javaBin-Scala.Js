@@ -120,9 +120,49 @@ public class Person
 						<li class="fragment">Kompilering av Scala-kildekode for å kjøre som Javascript ("webbens assemblykode"), som Typescript, Coffescript etc.</li>
 						<li class="fragment">Startet som et forskningsprosjekt på EPFL. Nå et stort miljø rundt både kompilator og tilhørende bibiliotek</li>
 						<li class="fragment">Ble erklært stabilt for bruk (og stabile API-er) våren 2015</li>
-						<li class="fragment">Det meste av Scalas funksjoner er støttet (inkl. makroer, Futures, typeklasser). Mangler reflection og tråder/sleep (som i JS).</li>
+						<li class="fragment">Det meste av Scalas funksjoner er støttet (inkl. makroer, Futures, typeklasser, async{await}). Mangler reflection og tråder/sleep (som i JS).</li>
 						<li class="fragment">Bibliotek kan krysskompileres til både Scala.Js og JVM og publisere begge til Maven-repositories.</li>
 					</ul>
+				</section>
+
+				<section>
+					<section>
+						<h2>Hvorfor Scala.Js?</h2>
+
+					<ul>
+						<li class="fragment">Typesikker kode. Ikke runtime-feil eller bugs ved typos eller blanding av typer ("kompilerer det, så fungerer det")</li>
+						<li class="fragment">Fullføring og dokumentasjon i IDE, ikke i ekstern dokumentasjon:
+							<img src="ide-screenshot.png">
+						</li>
+					</ul>
+					</section>
+					<section>
+						<h2>Hvorfor Scala.Js?</h2>
+						<ul>
+						<li class="fragment">Moderne og avansert språk</li>
+						<li class="fragment">Minimalt med boilerplate pga. bl.a. språkfunksjoner og makroer</li>
+						<li class="fragment">Gjenbruk mange av bibliotekene fra vanlig Scala i stedet for tilsvarende Javascript-bibliotek</li>
+						<li class="fragment">Samme byggesystem (sbt) for både frontend og backend. Webjars sørger for js-deps automatisk
+							(trenger ikke Gulp, Grunt, Bower, NPM eller hva det mest populære bygge/pakkesystem for JS heter i dag):<br />
+							<i>jsDependencies += "org.webjars" % "jasmine" % "1.3.1" / "jasmine-html.js" dependsOn "jasmine.js" <br /></i>
+							Wrappere sine avhengigheter hentes automatisk via maven
+						</li>
+						</ul>
+					</section>
+					<section>
+						<ul>
+						<li class="fragment">Deling av kode mellom klient og sørver (algoritmer, klasser serialisert over JSON, RPC)</li>
+						<li class="fragment">Bruk samme testrammeverk på klient- og sørverkode. Kjør samme tester under JVM og Node.js.</li>
+						<li class="fragment">Det er GØY å drive med webprogrammering med Scala.Js!:</li>
+						<li class="fragment">Sitat fra utvikler av Querki: "Switching to Scala.js improved productivity something like tenfold, both due to the strongly-typed environment and the clean end-to-end integration with the back end, thanks to deep Autowire-based APIs.  It's now far easier to add new UI pages, and new APIs to drive them"</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<h2>Men ES6 eller Typescript løser da alle problemer med Javascript?</h2>
+					<p>ES6 har mange nyttige tillegg, men Scala er fremdeles mer avansert språk, og det mangler typer.</p>
+					<p>Typescript er OK, men typer er ikke obligatorisk, og kun Node.Js (med callback pyramid of doom) er støttet på sørver.</p>
 				</section>
 
 				<section>
@@ -204,328 +244,66 @@ class Scene extends js.Object
 					</pre>
 				</section>
 
-				<!-- Example of nested vertical slides -->
 				<section>
-					<section>
-						<h2>Vertical Slides</h2>
-						<p>Slides can be nested inside of each other.</p>
-						<p>Use the <em>Space</em> key to navigate through all slides.</p>
-						<br>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 1</h2>
-						<p>Nested slides are useful for adding additional detail underneath a high level horizontal slide.</p>
-					</section>
-					<section>
-						<h2>Basement Level 2</h2>
-						<p>That's it, time to go back up.</p>
-						<br>
-						<a href="#/2">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
-						</a>
-					</section>
+					<h2>Bibliotek</h2>
+					<p>Mer og mer blir tilgjengelig krysskompilert for Scala.Js, f.eks: Monocle, Shapeless, Akka, ScalaTest, ScalaCheck</p>
+					<p>Enkelt å krysskompilere om alle dependencies finnes for Scala.Js, og koden ikke bruker ustøttede operasjoner som tråder eller reflection</p>
+					<p>Plugin for Play bygger automatisk JS ved endring ved relasting av siden</p>
 				</section>
 
 				<section>
-					<h2>Slides</h2>
-					<p>
-						Not a coder? Not a problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slides.com" target="_blank">http://slides.com</a>.
-					</p>
-				</section>
-
-				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
-				</section>
-
-				<section>
-					<h2>Touch Optimized</h2>
-					<p>
-						Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
-					</p>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
-
-						Write content using inline or external Markdown.
-						Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-
-						```
-						<section data-markdown>
-						  ## Markdown support
-
-						  Write content using inline or external Markdown.
-						  Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-						</section>
-						```
-					</script>
-				</section>
-
-				<section>
-					<section id="fragments">
-						<h2>Fragments</h2>
-						<p>Hit the next arrow...</p>
-						<p class="fragment">... to step through ...</p>
-						<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
-
-						<aside class="notes">
-							This slide has fragments which are also stepped through in the notes window.
-						</aside>
-					</section>
-					<section>
-						<h2>Fragment Styles</h2>
-						<p>There's different types of fragments, like:</p>
-						<p class="fragment grow">grow</p>
-						<p class="fragment shrink">shrink</p>
-						<p class="fragment fade-out">fade-out</p>
-						<p class="fragment current-visible">current-visible</p>
-						<p class="fragment highlight-red">highlight-red</p>
-						<p class="fragment highlight-blue">highlight-blue</p>
-					</section>
-				</section>
-
-				<section id="transitions">
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?transition=fade#/transitions">Fade</a> -
-						<a href="?transition=slide#/transitions">Slide</a> -
-						<a href="?transition=convex#/transitions">Convex</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a>
-					</p>
-				</section>
-
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						reveal.js comes with a few themes built in: <br>
-						<!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/sky.css'); return false;">Sky</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/beige.css'); return false;">Beige</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/simple.css'); return false;">Simple</a> <br>
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/serif.css'); return false;">Serif</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/blood.css'); return false;">Blood</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/night.css'); return false;">Night</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/moon.css'); return false;">Moon</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/solarized.css'); return false;">Solarized</a>
-					</p>
-				</section>
-
-				<section>
-					<section data-background="#dddddd">
-						<h2>Slide Backgrounds</h2>
-						<p>
-							Set <code>data-background="#dddddd"</code> on a slide to change the background color. All CSS color formats are supported.
-						</p>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png">
-						<h2>Image Backgrounds</h2>
-						<pre><code class="hljs">&lt;section data-background="image.png"&gt;</code></pre>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png" data-background-repeat="repeat" data-background-size="100px">
-						<h2>Tiled Backgrounds</h2>
-						<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
-					</section>
-					<section data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-color="#000000">
-						<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-							<h2>Video Backgrounds</h2>
-							<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
-						</div>
-					</section>
-					<section data-background="http://i.giphy.com/90F8aUepslB84.gif">
-						<h2>... and GIFs!</h2>
-					</section>
-				</section>
-
-				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						Different background transitions are available via the backgroundTransition option. This one's called "zoom".
-					</p>
-					<pre><code class="hljs">Reveal.configure({ backgroundTransition: 'zoom' })</code></pre>
-				</section>
-
-				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						You can override background transitions per-slide.
-					</p>
-					<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
-				</section>
-
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code class="hljs" data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
-  }
-}
-					</code></pre>
-					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-				</section>
-
-				<section>
-					<h2>Marvelous List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Fantastic Ordered List</h2>
+					<h2>Vanlige stacks i bruk</h2>
 					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
+						<li>HTML-kode i egen fil. Kun litt DOM-manipulering, evt. via jQuery-wrapper</li>
+						<li>Scalatags evt. med f.eks. Scala.Rx for funksjonelt reaktiv programmering:
+							<pre>
+body(
+    div(
+      h1(id:="title", "This is a title"),
+      p("This is a big paragraph of text")
+    )
+)
+							</pre>
+						</li>
+						<li>JS-wrappere for f.eks. Angular og FB React</li>
+						<li>Native webrammeverk for Scala.js som Widok/MetaRx, ScalaJS Binding</li>
 					</ol>
 				</section>
 
 				<section>
-					<h2>Tabular Tables</h2>
-					<table>
-						<thead>
-							<tr>
-								<th>Item</th>
-								<th>Value</th>
-								<th>Quantity</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Apples</td>
-								<td>$1</td>
-								<td>7</td>
-							</tr>
-							<tr>
-								<td>Lemonade</td>
-								<td>$2</td>
-								<td>18</td>
-							</tr>
-							<tr>
-								<td>Bread</td>
-								<td>$3</td>
-								<td>2</td>
-							</tr>
-						</tbody>
-					</table>
+					<h2>React og React Native</h2>
+					<p>Man har er veldig populær wrapper for React: scalajs-react</p>
+					<p>Pakker inn React på en typesikker måte for props og state</p>
 				</section>
 
 				<section>
-					<h2>Clever Quotes</h2>
+					<div class="stretch">
+						<iframe width="100%" height="100%" src="https://japgolly.github.io/scalajs-react"></iframe>
+					</div>
+				</section>
+
+				<section>
+					<section>
+						<h2>React Native</h2>
+						<p>Relativt nytt, spesielt for Android. Finnes en umoden wrapper: Sri (Scala React interface)</p>
+						<p>Denne er en mer Javascript-basert tilnærming ved bruk av støtten for ES6-klasser i nyeste React-versjonene. Foreløpig noen deler som er
+						mindre sterkt typet. Støtter både iOS, Android, Web og Desktop (via Electron)</p>
+					</section>
+					<section><img src="sri.png"></section>
+					<section><img src="moviesapp.gif"></section>
+				</section>
+
+				<section>
+					<h2>Demo / spørsmål?</h2>
+
 					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
+						<a href="mailto:marius@kotsbak.com">Marius B.Kotsbak</a> / <a href="http://twitter.com/mkotsbak">@mkotsbak</a> / <a href="https://github.com/mkotsbak">github.com/mkotsbak</a>
 					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-					</blockquote>
-				</section>
-
-				<section>
-					<h2>Intergalactic Interconnections</h2>
 					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
+						<img src="logo_webstep.jpg" alt="Webstep" style="width: 30%; height: 30%"><br />
 					</p>
 				</section>
-
-				<section>
-					<h2>Speaker View</h2>
-					<p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
-					<p>Press the <em>S</em> key to try it out.</p>
-
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
-				</section>
-
-				<section>
-					<h2>Export to PDF</h2>
-					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
-					<iframe src="https://www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-				</section>
-
-				<section>
-					<h2>Global State</h2>
-					<p>
-						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-						will be added as a class to the document element when the slide is open. This lets you
-						apply broader style changes, like switching the page background.
-					</p>
-				</section>
-
-				<section data-state="customevent">
-					<h2>State Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
-
-				<section>
-					<h2>Take a Moment</h2>
-					<p>
-						Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
-					</p>
-				</section>
-
-				<section>
-					<h2>Much more</h2>
-					<ul>
-						<li>Right-to-left support</li>
-						<li><a href="https://github.com/hakimel/reveal.js#api">Extensive JavaScript API</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#auto-sliding">Auto-progression</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#parallax-background">Parallax backgrounds</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#keyboard-bindings">Custom keyboard bindings</a></li>
-					</ul>
-				</section>
-
-				<section style="text-align: left;">
-					<h1>THE END</h1>
-					<p>
-						- <a href="http://slides.com">Try the online editor</a> <br>
-						- <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
-					</p>
-				</section>
-
 			</div>
-
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
